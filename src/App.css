@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  /* background-color: rgb(143, 156, 156); */
+  background-image: url("https://images.wallpaperscraft.com/image/single/points_cubes_background_light_91691_1440x900.jpg");
+}
+header {
+  font-size: x-large;
+}
+.signin-signup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.app-title {
+  grid-area: 1/1/1/1;
+  text-align: center;
+  place-items: center;
+  justify-items: center;
+  color:floralwhite;
+  font-size: 25px;
+}
+.signin-signup-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  place-items: center;
+  grid-area: 1/2/1/2;
+  height: auto;
+  margin: 0 auto;
+  width: 370px;
+  gap: 4px;
+  padding: 40px 30px;
+  border-radius: 10px;
+  background:honeydew;
+  box-shadow: 9px 10px 14px -1px rgba(81, 97, 104, 0.849);
+  backdrop-filter: blur(6.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.social-media {
+  display: flex;
+  gap: 15px;
+}
+.input{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+.url-input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:rgb(169 172 187);
+  box-shadow: 9px 10px 14px -1px rgba(21, 23, 24, 0.849);
+  border-radius: 10px;
+  height: 100px;
+  margin: 25px;
+  padding: 15px;
+}
+.input{
+  width: 100%;
+}
+.url-input2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color:rgb(169 172 187);
+  box-shadow: 9px 10px 14px -1px rgba(21, 23, 24, 0.849);
+  border-radius: 10px;
+  height: auto;
+  margin: 25px;
+  padding: 15px;
+}
+.short-url{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
