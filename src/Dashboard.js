@@ -25,7 +25,7 @@ const formValidationSchema = yup.object({
 });
 
 export function Dashboard() {
-  const URL = `http://localhost:8000`;
+  const URL = `https://url--shortner--app.herokuapp.com`;
   const [count, setCount] = useState(false);
   const [shortUrl, setShortUrl] = useState("");
   const [responseData, setResponseData] = useState(null);

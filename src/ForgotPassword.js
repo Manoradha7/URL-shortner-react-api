@@ -16,7 +16,7 @@ const formValidationSchema = yup.object({
 // forgetpassword
 export function ForgotPassword() {
   const history = useHistory();
-  //
+  //useformik
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: { email: "" },
@@ -26,7 +26,7 @@ export function ForgotPassword() {
         console.log("onSubmit", values);
       },
     });
-  const URL = `http://localhost:8000`;
+  const URL = `https://url--shortner--app.herokuapp.com`;
   const forgot = (values) => {
     fetch(`${URL}/users/forgotpassword`, {
       method: "POST",

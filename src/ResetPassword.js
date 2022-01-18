@@ -30,7 +30,7 @@ export function ResetPassword() {
       },
     });
 
-  const URL = `http://localhost:8000`;
+  const URL = `https://url--shortner--app.herokuapp.com`;
   const Changepassword = async (values) => {
     fetch(`${URL}/users/resetpassword`, {
       method: "POST",

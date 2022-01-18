@@ -52,6 +52,7 @@ export function Signup() {
   // formik
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
+      //get initialvalues empty
       initialValues: {
         fname: "",
         lname:"",
@@ -60,13 +61,16 @@ export function Signup() {
         password: "",
         passwordConfirmation: "",
       },
+      //validate the input
       validationSchema: formValidationSchema,
+
       onSubmit: (values) => {
         Register(values).then( history.push("/signin"));
         console.log("onSubmit", values);
       },
     });
-  const URL = `http://localhost:8000`;
+    //url for backend
+  const URL = `https://url--shortner--app.herokuapp.com`;
 
   const Register = async (values) => {
     await fetch(`${URL}/users/signup`, {

@@ -18,7 +18,7 @@ import MuiAlert from "@mui/material/Alert";
 import { Link } from "@mui/material";
 
 
-const URL = `http://localhost:8000`;
+const URL = `https://url--shortner--app.herokuapp.com`;
 
 export function Userdata() {
   const history = useHistory();
