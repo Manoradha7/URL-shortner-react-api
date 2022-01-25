@@ -5,7 +5,6 @@ import { Signup } from "./Signup";
 import { ForgotPassword } from "./ForgotPassword";
 import { ResetPassword } from "./ResetPassword";
 import { Dashboard } from "./Dashboard";
-import { Userdata } from "./Userdata";
 import { Message } from "./Message";
 
 import AppBar from "@mui/material/AppBar";
@@ -14,43 +13,14 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
+import { Urldata } from "./Urldata";
 
 
-// const URL=`http://localhost:8000`
+// const URL=`https://url--shortner--app.herokuapp.com`
 function App() {
   return (
     <div className="App">
       <div className="container">
-        <Container />
-      </div>
-    </div>
-  );
-}
-function Container() {
-  const history= useHistory()
-  return (
-    <div className="container">
-      <div>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Button onClick={() => history.push("/dashboard")} color="inherit">
-            Home
-          </Button>
-          <Button onClick={() => history.push("/userdata")} color="inherit">
-            URL
-          </Button>
-        </Toolbar>
-      </AppBar>
-
         <Switch>
           <Route exact path="/">
             <Redirect to="/signin" />
@@ -67,20 +37,18 @@ function Container() {
           <Route path="/activationmessage">
             <Message msg="Account Activated" />
           </Route>
-          <Route path="/mailsentmessage">
-            <Message msg="Mail Sent For verification" />
-          </Route>
-          <Route path="/successMessage">
-            <Message msg="Password Successfully Changed!!! Go to Signin page" />
-          </Route>
           <Route path="/resetpassword/:id">
             <ResetPassword />
           </Route>
+
+          {/* dashboard */}
           <Route path="/dashboard">
+            <Container />
             <Dashboard />
           </Route>
-          <Route path="/userdata">
-            <Userdata />
+          <Route path="/urldata">
+            <Container />
+            <Urldata />
           </Route>
         </Switch>
       </div>
@@ -88,4 +56,43 @@ function Container() {
   );
 }
 
+function Container() {
+  const history = useHistory();
+  return (
+    <div className="container">
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Button onClick={() => history.push("/dashboard")} color="inherit">
+              Home
+            </Button>
+            <Button onClick={() => history.push("/urldata")} color="inherit">
+              URL
+            </Button>
+            <Button
+              onClick={() => history.push("/")}
+              color="inherit"
+              style={{ marginLeft: "auto" }}
+            >
+              LogOut
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    </div>
+  );
+}
+
 export default App;
+
+
+

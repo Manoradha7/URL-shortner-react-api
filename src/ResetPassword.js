@@ -1,9 +1,12 @@
+import * as React from 'react';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import { useFormik } from "formik";
 import { useHistory, useParams } from "react-router-dom";
 import * as yup from "yup";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const formValidationSchema = yup.object({
   password: yup
@@ -19,6 +22,22 @@ const formValidationSchema = yup.object({
 
 export function ResetPassword() {
   const { id } = useParams();
+  
+  //snack bar
+  const [open, setOpen] = React.useState(false);
+  const [Msg, setMsg] = React.useState("");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
   const history = useHistory();
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
@@ -26,7 +45,6 @@ export function ResetPassword() {
       validationSchema: formValidationSchema,
       onSubmit: (values) => {
         Changepassword(values);
-        console.log("onSumit", values);
       },
     });
 
@@ -37,8 +55,16 @@ export function ResetPassword() {
       body: JSON.stringify(values),
       headers: { "Content-Type": "application/json" },
     })
-      .then((response) => response.status)
-      .then((status) => (status === 200 ? history.push("/successMessage") : null));
+    .then((response) => {
+      if (response.status === 200) {
+        setMsg({
+          Message: "Password Changed Successfully",
+          status: "success",
+        });
+        setOpen(true);
+        setTimeout(()=>history.push("/"),3000);
+      }
+    });
   };
   return (
     <div className="signin-signup">
@@ -89,6 +115,20 @@ export function ResetPassword() {
           Submit
         </Button>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={Msg.status}
+          sx={{ width: "100%" }}
+        >
+          {Msg.Message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

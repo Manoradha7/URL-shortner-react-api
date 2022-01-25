@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -86,4 +87,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 700px;
+}
+
+.card{
+ margin: 10px;
+ gap: 5px;
+ max-height: 230px;
+ word-wrap: break-word;
+ overflow:auto;
+ font-family: 'Arvo', serif;
 }

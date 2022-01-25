@@ -1,9 +1,12 @@
+import * as React from 'react';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import LoginIcon from "@mui/icons-material/Login";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
 import * as yup from "yup";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 
 // validate form using yup
 const formValidationSchema = yup.object({
@@ -15,7 +18,20 @@ const formValidationSchema = yup.object({
 });
 // forgetpassword
 export function ForgotPassword() {
-  const history = useHistory();
+  //snack bar
+  const [open, setOpen] = React.useState(false);
+  const [Msg, setMsg] = React.useState("");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   //useformik
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
@@ -23,7 +39,6 @@ export function ForgotPassword() {
       validationSchema: formValidationSchema,
       onSubmit: (values) => {
         forgot(values);
-        console.log("onSubmit", values);
       },
     });
   const URL = `https://url--shortner--app.herokuapp.com`;
@@ -32,10 +47,16 @@ export function ForgotPassword() {
       method: "POST",
       body: JSON.stringify(values),
       headers: { "Content-Type": "application/json" },
-    }).then((response) =>{
-      if(response.status===200){
-        history.push("/mailsentmessage")
+    }).then((response) => {
+      if (response.status === 200) {
+        setMsg({
+          Message: "Verification link sent to the registered mail",
+          status: "success",
+        });
+      } else {
+        setMsg({ Message: "Mail is not registered", status: "error" });
       }
+      setOpen(true);
     });
   };
   return (
@@ -69,6 +90,20 @@ export function ForgotPassword() {
           Submit
         </Button>
       </form>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={Msg.status}
+          sx={{ width: "100%" }}
+        >
+          {Msg.Message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
